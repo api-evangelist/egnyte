@@ -1,0 +1,66 @@
+{
+    "name": "Egnyte",
+    "description": "Egnyte provides secure Enterprise File Sharing and Content Governance built from the Cloud down. Access, Share and Control 100% of your data from anywhere using any smartphone, tablet or computer.",
+    "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/28291-developers-egnyte-com.jpg",
+    "tags": [
+        "api provider",
+        "api service provider",
+        "have api",
+        "storage"
+    ],
+    "created": "2019-12-19",
+    "modified": "2019-12-19",
+    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/egnyte\/master\/apis.json",
+    "specificationVersion": "0.14",
+    "apis": [
+        {
+            "name": "Egnyte",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/28291-developers-egnyte-com.jpg",
+            "humanURL": "https:\/\/developers.egnyte.com",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/egnyte-openapi.json"
+                }
+            ]
+        }
+    ],
+    "include": [],
+    "x-common": [
+        {
+            "type": "Crunchbase",
+            "url": "https:\/\/crunchbase.com\/organization\/egnyte"
+        },
+        {
+            "type": "Email",
+            "url": "support@egnyte.com"
+        },
+        {
+            "type": "Email",
+            "url": "security@egnyte.com"
+        },
+        {
+            "type": "Email",
+            "url": "cjordan@egnyte.com"
+        },
+        {
+            "type": "Email",
+            "url": "inquiry@egnyte.com"
+        },
+        {
+            "type": "Email",
+            "url": "legal@Egnyte.com"
+        },
+        {
+            "type": "Twitter",
+            "url": "https:\/\/twitter.com\/Egnyte"
+        },
+        {
+            "type": "Website",
+            "url": "https:\/\/developers.egnyte.com"
+        }
+    ]
+}
