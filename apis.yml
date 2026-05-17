@@ -46,7 +46,7 @@ apis:
         url: https://developers.egnyte.com/docs
       - type: Authentication
         url: https://developers.egnyte.com/docs/read/Public_API_Authentication
-      - type: Getting Started
+      - type: GettingStarted
         url: https://developers.egnyte.com/docs/read/getting_started
       - type: File System API
         url: https://developers.egnyte.com/docs/read/File_System_Management_API_Documentation
@@ -62,27 +62,27 @@ common:
     url: https://developers.egnyte.com/
   - type: Authentication
     url: https://developers.egnyte.com/docs/read/Public_API_Authentication
-  - type: Getting Started
+  - type: GettingStarted
     url: https://developers.egnyte.com/docs/read/getting_started
   - type: API Explorer
     url: https://developers.egnyte.com/io-docs
   - type: Pricing
     url: https://www.egnyte.com/pricing
-  - type: Sign Up
+  - type: SignUp
     url: https://developers.egnyte.com/member/register
   - type: Login
     url: https://developers.egnyte.com/member/login
   - type: Support
     url: https://helpdesk.egnyte.com/
-  - type: Status
+  - type: StatusPage
     url: https://status.egnyte.com/
   - type: Blog
     url: https://www.egnyte.com/blog
-  - type: Privacy Policy
+  - type: PrivacyPolicy
     url: https://www.egnyte.com/corp/privacy-policy
-  - type: Terms of Service
+  - type: TermsOfService
     url: https://www.egnyte.com/corp/legal/end-user-license-agreement
-  - type: GitHub Organization
+  - type: GitHubOrganization
     url: https://github.com/egnyte
   - type: Python SDK
     url: https://github.com/egnyte/python-egnyte
