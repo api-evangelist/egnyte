@@ -21,7 +21,7 @@ tags:
 url: >-
   https://raw.githubusercontent.com/api-evangelist/egnyte/refs/heads/main/apis.yml
 created: '2026-05-11'
-modified: '2026-05-11'
+modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
   - aid: egnyte:public-api
@@ -90,6 +90,9 @@ common:
     url: https://www.linkedin.com/company/egnyte
   - type: X (Twitter)
     url: https://x.com/egnyte
+  - name: MCP Server
+    url: https://github.com/egnyte/egnyte-mcp-server
+    type: MCPServer
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
