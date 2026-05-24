@@ -93,6 +93,8 @@ common:
   - name: MCP Server
     url: https://github.com/egnyte/egnyte-mcp-server
     type: MCPServer
+  - type: LLMsTxt
+    url: https://developers.egnyte.com/llms.txt
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
