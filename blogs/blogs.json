@@ -1,0 +1,14 @@
+{
+  "repo": "egnyte",
+  "feeds": [
+    {
+      "source": "https://status.egnyte.com/",
+      "feed_url": "https://status.egnyte.com/history.atom",
+      "title": "",
+      "saved": 2,
+      "method": "discovered"
+    }
+  ],
+  "post_count": 2,
+  "fetched": "2026-06-01T23:35:02Z"
+}
