@@ -1,0 +1,311 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Egnyte Public API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://{domain}.egnyte.com/puboauth/token",
+      "accessTokenUrl": "https://{domain}.egnyte.com/puboauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "File System",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List folder contents or get file metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{domain}.egnyte.com/pubapi/v1/fs/:path",
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List folder contents or get file metadata"
+        },
+        {
+          "info": {
+            "name": "Create folder or copy/move",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{domain}.egnyte.com/pubapi/v1/fs/:path",
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create folder or copy/move"
+        },
+        {
+          "info": {
+            "name": "Delete file or folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{domain}.egnyte.com/pubapi/v1/fs/:path",
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete file or folder"
+        },
+        {
+          "info": {
+            "name": "Download file content",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{domain}.egnyte.com/pubapi/v1/fs-content/:path",
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Download file content"
+        },
+        {
+          "info": {
+            "name": "Upload file content",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{domain}.egnyte.com/pubapi/v1/fs-content/:path",
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Upload file content"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{domain}.egnyte.com/pubapi/v2/users",
+            "params": [
+              {
+                "name": "startIndex",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List users"
+        },
+        {
+          "info": {
+            "name": "Create user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{domain}.egnyte.com/pubapi/v2/users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create user"
+        },
+        {
+          "info": {
+            "name": "Get user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{domain}.egnyte.com/pubapi/v2/users/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get user"
+        },
+        {
+          "info": {
+            "name": "Update user",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{domain}.egnyte.com/pubapi/v2/users/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update user"
+        },
+        {
+          "info": {
+            "name": "Delete user",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{domain}.egnyte.com/pubapi/v2/users/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete user"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{domain}.egnyte.com/pubapi/v2/groups"
+          },
+          "docs": "List groups"
+        },
+        {
+          "info": {
+            "name": "Create group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{domain}.egnyte.com/pubapi/v2/groups",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create group"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Links",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a shared link",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{domain}.egnyte.com/pubapi/v1/links",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a shared link"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Permissions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List folder permissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{domain}.egnyte.com/pubapi/v1/perms/:path",
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List folder permissions"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
