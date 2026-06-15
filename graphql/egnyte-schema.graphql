@@ -1,0 +1,913 @@
+"""
+Egnyte GraphQL Schema
+Derived from the Egnyte REST API covering file system management, user provisioning,
+permissions, links, audit logs, and project workspace management.
+"""
+
+# ─── Scalars ───────────────────────────────────────────────────────────────────
+
+scalar DateTime
+scalar JSON
+scalar Upload
+
+# ─── Enums ─────────────────────────────────────────────────────────────────────
+
+enum FileType {
+  FILE
+  FOLDER
+}
+
+enum PermissionLevel {
+  NONE
+  VIEWER
+  EDITOR
+  FULL
+  OWNER
+}
+
+enum LinkType {
+  FILE
+  FOLDER
+}
+
+enum LinkAccessibility {
+  ANYONE
+  PASSWORD
+  DOMAIN
+  RECIPIENTS
+}
+
+enum LinkKind {
+  VIEW_LINK
+  EDIT_LINK
+  UPLOAD_LINK
+}
+
+enum UserStatus {
+  ACTIVE
+  LOCKED
+  DISABLED
+}
+
+enum UserRole {
+  ADMINISTRATOR
+  POWER_USER
+  STANDARD_USER
+  EXTERNAL_USER
+  VIEWER
+}
+
+enum AuditEventType {
+  FILE_UPLOAD
+  FILE_DOWNLOAD
+  FILE_DELETE
+  FILE_MOVE
+  FILE_COPY
+  FILE_RENAME
+  FOLDER_CREATE
+  FOLDER_DELETE
+  FOLDER_MOVE
+  FOLDER_RENAME
+  LINK_CREATE
+  LINK_DELETE
+  LINK_ACCESS
+  LOGIN
+  LOGOUT
+  PERMISSION_CHANGE
+  USER_CREATE
+  USER_UPDATE
+  USER_DELETE
+  GROUP_CREATE
+  GROUP_UPDATE
+  GROUP_DELETE
+}
+
+enum SortOrder {
+  ASC
+  DESC
+}
+
+enum FileSortField {
+  NAME
+  SIZE
+  LAST_MODIFIED
+  UPLOADED
+}
+
+enum SearchSortField {
+  NAME
+  SCORE
+  LAST_MODIFIED
+}
+
+enum NotificationType {
+  EMAIL
+  IN_APP
+}
+
+enum WorkflowStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum TaskStatus {
+  OPEN
+  IN_PROGRESS
+  COMPLETED
+  DEFERRED
+}
+
+# ─── Interfaces ────────────────────────────────────────────────────────────────
+
+interface FileSystemEntry {
+  id: ID!
+  name: String!
+  path: String!
+  parentPath: String
+  entryType: FileType!
+  createdAt: DateTime
+  lastModified: DateTime
+  owner: String
+  checksum: String
+}
+
+interface Auditable {
+  createdAt: DateTime
+  lastModifiedAt: DateTime
+  createdBy: String
+  lastModifiedBy: String
+}
+
+# ─── Core File System Types ────────────────────────────────────────────────────
+
+type File implements FileSystemEntry & Auditable {
+  id: ID!
+  name: String!
+  path: String!
+  parentPath: String
+  entryType: FileType!
+  createdAt: DateTime
+  lastModified: DateTime
+  owner: String
+  checksum: String
+  size: Int
+  contentType: String
+  uploadedBy: String
+  numVersions: Int
+  versions: [FileVersion!]
+  locked: Boolean
+  lockedBy: String
+  tags: [String!]
+  customMetadata: JSON
+  permissions: FilePermission
+  lastModifiedAt: DateTime
+  lastModifiedBy: String
+  createdBy: String
+  thumbnailUrl: String
+  downloadUrl: String
+}
+
+type Folder implements FileSystemEntry & Auditable {
+  id: ID!
+  name: String!
+  path: String!
+  parentPath: String
+  entryType: FileType!
+  createdAt: DateTime
+  lastModified: DateTime
+  owner: String
+  checksum: String
+  totalFiles: Int
+  totalFolders: Int
+  totalSize: Int
+  files: [File!]
+  subfolders: [Folder!]
+  contents: FolderContents
+  permissions: FolderPermission
+  publicLinks: [Link!]
+  tags: [String!]
+  customMetadata: JSON
+  lastModifiedAt: DateTime
+  lastModifiedBy: String
+  createdBy: String
+  retentionPolicy: RetentionPolicy
+}
+
+type FolderContents {
+  path: String!
+  name: String!
+  files: [File!]
+  folders: [Folder!]
+  totalCount: Int!
+  offset: Int!
+  count: Int!
+  restrictedFiles: Int
+}
+
+type FileVersion {
+  versionId: String!
+  checksum: String
+  size: Int
+  lastModified: DateTime
+  uploadedBy: String
+  comment: String
+  isCurrent: Boolean!
+}
+
+type FilePermission {
+  path: String!
+  userPermissions: [UserPermissionEntry!]
+  groupPermissions: [GroupPermissionEntry!]
+  effectivePermission: PermissionLevel
+  inheritedFrom: String
+}
+
+type FolderPermission {
+  path: String!
+  userPermissions: [UserPermissionEntry!]
+  groupPermissions: [GroupPermissionEntry!]
+  inheritPermissions: Boolean!
+  effectivePermission: PermissionLevel
+}
+
+type UserPermissionEntry {
+  subject: String!
+  permission: PermissionLevel!
+  inherited: Boolean
+}
+
+type GroupPermissionEntry {
+  groupName: String!
+  permission: PermissionLevel!
+  inherited: Boolean
+}
+
+# ─── User and Group Types ───────────────────────────────────────────────────────
+
+type User implements Auditable {
+  id: ID!
+  username: String!
+  email: String!
+  firstName: String
+  lastName: String
+  displayName: String
+  status: UserStatus!
+  role: UserRole!
+  locked: Boolean!
+  externalId: String
+  userType: String
+  idpUserId: String
+  authType: String
+  userPrincipalName: String
+  createdAt: DateTime
+  lastModifiedAt: DateTime
+  lastLoginAt: DateTime
+  createdBy: String
+  lastModifiedBy: String
+  groups: [Group!]
+  quota: StorageQuota
+  sendInvite: Boolean
+}
+
+type Group implements Auditable {
+  id: ID!
+  name: String!
+  displayName: String
+  members: [User!]
+  memberCount: Int
+  externalId: String
+  createdAt: DateTime
+  lastModifiedAt: DateTime
+  createdBy: String
+  lastModifiedBy: String
+}
+
+type StorageQuota {
+  total: Int
+  used: Int
+  available: Int
+}
+
+# ─── Link Types ────────────────────────────────────────────────────────────────
+
+type Link {
+  id: ID!
+  url: String!
+  kind: LinkKind!
+  linkType: LinkType!
+  path: String!
+  accessibility: LinkAccessibility!
+  notifyOnAccess: Boolean
+  sendEmailNotification: Boolean
+  recipients: [String!]
+  message: String
+  copyMe: Boolean
+  protectWithPassword: Boolean
+  expiryDate: DateTime
+  expiryClicks: Int
+  hasPassword: Boolean
+  createdAt: DateTime
+  createdBy: String
+  totalClicks: Int
+  lastAccessedAt: DateTime
+  file: File
+  folder: Folder
+}
+
+type LinkAccessLog {
+  linkId: String!
+  accessedAt: DateTime!
+  accessedBy: String
+  ipAddress: String
+  userAgent: String
+}
+
+# ─── Search Types ──────────────────────────────────────────────────────────────
+
+type SearchResult {
+  totalResults: Int!
+  offset: Int!
+  count: Int!
+  results: [SearchResultItem!]!
+}
+
+type SearchResultItem {
+  path: String!
+  name: String!
+  entryType: FileType!
+  size: Int
+  lastModified: DateTime
+  snippet: String
+  score: Float
+  file: File
+  folder: Folder
+}
+
+# ─── Audit Types ───────────────────────────────────────────────────────────────
+
+type AuditEvent {
+  id: ID!
+  eventType: AuditEventType!
+  timestamp: DateTime!
+  userId: String
+  userEmail: String
+  ipAddress: String
+  path: String
+  targetPath: String
+  details: JSON
+  success: Boolean!
+  errorMessage: String
+}
+
+type AuditReport {
+  id: ID!
+  name: String!
+  startDate: DateTime
+  endDate: DateTime
+  events: [AuditEvent!]!
+  totalEvents: Int!
+  generatedAt: DateTime!
+}
+
+type AuditPage {
+  events: [AuditEvent!]!
+  nextPageToken: String
+  totalCount: Int
+}
+
+# ─── Notification Types ─────────────────────────────────────────────────────────
+
+type Notification {
+  id: ID!
+  type: NotificationType!
+  userId: String!
+  message: String!
+  path: String
+  read: Boolean!
+  createdAt: DateTime!
+}
+
+type NotificationSetting {
+  userId: String!
+  path: String!
+  notifyOnUpload: Boolean!
+  notifyOnDownload: Boolean!
+  notifyOnDelete: Boolean!
+  notifyOnMove: Boolean!
+  email: String
+}
+
+# ─── Workflow and Task Types ────────────────────────────────────────────────────
+
+type Workflow {
+  id: ID!
+  name: String!
+  description: String
+  status: WorkflowStatus!
+  createdBy: String!
+  assignedTo: [String!]
+  dueDate: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime
+  tasks: [WorkflowTask!]
+  path: String
+  metadata: JSON
+}
+
+type WorkflowTask {
+  id: ID!
+  workflowId: String!
+  title: String!
+  description: String
+  status: TaskStatus!
+  assignedTo: String
+  dueDate: DateTime
+  completedAt: DateTime
+  completedBy: String
+  comments: [TaskComment!]
+}
+
+type TaskComment {
+  id: ID!
+  taskId: String!
+  author: String!
+  content: String!
+  createdAt: DateTime!
+}
+
+# ─── Retention Policy Types ─────────────────────────────────────────────────────
+
+type RetentionPolicy {
+  id: ID!
+  name: String!
+  description: String
+  retentionPeriodDays: Int!
+  appliedPaths: [String!]!
+  createdAt: DateTime
+  updatedAt: DateTime
+  createdBy: String
+  active: Boolean!
+}
+
+# ─── Webhook Types ─────────────────────────────────────────────────────────────
+
+type Webhook {
+  id: ID!
+  url: String!
+  events: [AuditEventType!]!
+  path: String
+  active: Boolean!
+  secret: String
+  createdAt: DateTime
+  createdBy: String
+  lastTriggeredAt: DateTime
+  deliveryFailures: Int
+}
+
+type WebhookDelivery {
+  id: ID!
+  webhookId: String!
+  event: AuditEventType!
+  payload: JSON!
+  deliveredAt: DateTime
+  statusCode: Int
+  success: Boolean!
+  errorMessage: String
+}
+
+# ─── OAuth / Auth Types ─────────────────────────────────────────────────────────
+
+type OAuthToken {
+  accessToken: String!
+  tokenType: String!
+  expiresIn: Int
+  refreshToken: String
+  scope: String
+}
+
+type ApiKey {
+  id: ID!
+  name: String!
+  key: String
+  createdAt: DateTime!
+  createdBy: String!
+  lastUsedAt: DateTime
+  scopes: [String!]
+  active: Boolean!
+}
+
+# ─── Pagination / Utility Types ─────────────────────────────────────────────────
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+  totalCount: Int
+}
+
+type UserConnection {
+  nodes: [User!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type GroupConnection {
+  nodes: [Group!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type LinkConnection {
+  nodes: [Link!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type FileConnection {
+  nodes: [File!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type OperationResult {
+  success: Boolean!
+  message: String
+  errors: [String!]
+}
+
+# ─── Input Types ───────────────────────────────────────────────────────────────
+
+input FileUploadInput {
+  path: String!
+  content: Upload!
+  overwrite: Boolean
+  lastModified: DateTime
+}
+
+input MoveCopyInput {
+  sourcePath: String!
+  destinationPath: String!
+  keepBothFiles: Boolean
+}
+
+input CreateFolderInput {
+  path: String!
+}
+
+input SetPermissionInput {
+  path: String!
+  userPermissions: [UserPermissionInput!]
+  groupPermissions: [GroupPermissionInput!]
+  inheritPermissions: Boolean
+}
+
+input UserPermissionInput {
+  subject: String!
+  permission: PermissionLevel!
+}
+
+input GroupPermissionInput {
+  groupName: String!
+  permission: PermissionLevel!
+}
+
+input CreateLinkInput {
+  kind: LinkKind!
+  path: String!
+  accessibility: LinkAccessibility!
+  notifyOnAccess: Boolean
+  sendEmailNotification: Boolean
+  recipients: [String!]
+  message: String
+  copyMe: Boolean
+  protectWithPassword: Boolean
+  password: String
+  expiryDate: DateTime
+  expiryClicks: Int
+}
+
+input UpdateLinkInput {
+  accessibility: LinkAccessibility
+  notifyOnAccess: Boolean
+  recipients: [String!]
+  message: String
+  protectWithPassword: Boolean
+  password: String
+  expiryDate: DateTime
+  expiryClicks: Int
+}
+
+input CreateUserInput {
+  username: String!
+  email: String!
+  firstName: String
+  lastName: String
+  role: UserRole!
+  sendInvite: Boolean
+  externalId: String
+  idpUserId: String
+  authType: String
+}
+
+input UpdateUserInput {
+  email: String
+  firstName: String
+  lastName: String
+  role: UserRole
+  status: UserStatus
+  externalId: String
+  idpUserId: String
+}
+
+input CreateGroupInput {
+  name: String!
+  members: [String!]
+}
+
+input UpdateGroupInput {
+  name: String
+  membersToAdd: [String!]
+  membersToRemove: [String!]
+}
+
+input SearchInput {
+  query: String!
+  folder: String
+  fileType: String
+  lastModifiedAfter: DateTime
+  lastModifiedBefore: DateTime
+  offset: Int
+  count: Int
+  sortField: SearchSortField
+  sortOrder: SortOrder
+}
+
+input AuditQueryInput {
+  startDate: DateTime
+  endDate: DateTime
+  userId: String
+  eventType: AuditEventType
+  path: String
+  pageToken: String
+  pageSize: Int
+}
+
+input CreateWorkflowInput {
+  name: String!
+  description: String
+  assignedTo: [String!]
+  dueDate: DateTime
+  path: String
+  metadata: JSON
+}
+
+input CreateWebhookInput {
+  url: String!
+  events: [AuditEventType!]!
+  path: String
+  secret: String
+}
+
+input FileListInput {
+  path: String!
+  offset: Int
+  count: Int
+  sortField: FileSortField
+  sortOrder: SortOrder
+  includeDeleted: Boolean
+}
+
+# ─── Query Root ────────────────────────────────────────────────────────────────
+
+type Query {
+  "Retrieve metadata for a file at a given path"
+  file(path: String!): File
+
+  "Retrieve metadata for a folder at a given path"
+  folder(path: String!): Folder
+
+  "List the contents of a folder"
+  folderContents(input: FileListInput!): FolderContents
+
+  "Get all versions of a file"
+  fileVersions(path: String!): [FileVersion!]
+
+  "Get a specific file version"
+  fileVersion(path: String!, versionId: String!): FileVersion
+
+  "Retrieve permission details for a path"
+  permissions(path: String!): FilePermission
+
+  "Get a link by its ID"
+  link(linkId: String!): Link
+
+  "List all links"
+  links(offset: Int, count: Int): LinkConnection
+
+  "List links for a specific file or folder path"
+  linksForPath(path: String!): [Link!]
+
+  "Search for files and folders"
+  search(input: SearchInput!): SearchResult
+
+  "Get a specific user by ID"
+  user(userId: ID!): User
+
+  "Get a user by username"
+  userByUsername(username: String!): User
+
+  "List all users"
+  users(offset: Int, count: Int, status: UserStatus, role: UserRole): UserConnection
+
+  "Get a specific group by ID"
+  group(groupId: ID!): Group
+
+  "Get a group by name"
+  groupByName(name: String!): Group
+
+  "List all groups"
+  groups(offset: Int, count: Int): GroupConnection
+
+  "List members of a group"
+  groupMembers(groupId: ID!): [User!]
+
+  "Get audit events with optional filters"
+  auditEvents(input: AuditQueryInput!): AuditPage
+
+  "Get a specific audit report"
+  auditReport(reportId: ID!): AuditReport
+
+  "List audit reports"
+  auditReports: [AuditReport!]
+
+  "List notifications for the current user"
+  notifications(unreadOnly: Boolean): [Notification!]
+
+  "Get notification settings for a path"
+  notificationSettings(path: String!): NotificationSetting
+
+  "Get a workflow by ID"
+  workflow(workflowId: ID!): Workflow
+
+  "List workflows"
+  workflows(status: WorkflowStatus, offset: Int, count: Int): [Workflow!]
+
+  "Get a workflow task by ID"
+  workflowTask(taskId: ID!): WorkflowTask
+
+  "List retention policies"
+  retentionPolicies: [RetentionPolicy!]
+
+  "Get a retention policy by ID"
+  retentionPolicy(policyId: ID!): RetentionPolicy
+
+  "Get a webhook by ID"
+  webhook(webhookId: ID!): Webhook
+
+  "List webhooks"
+  webhooks: [Webhook!]
+
+  "List webhook delivery history"
+  webhookDeliveries(webhookId: ID!, limit: Int): [WebhookDelivery!]
+
+  "List API keys for the current user"
+  apiKeys: [ApiKey!]
+
+  "Get storage quota for a user"
+  storageQuota(userId: ID!): StorageQuota
+}
+
+# ─── Mutation Root ─────────────────────────────────────────────────────────────
+
+type Mutation {
+  "Upload a file"
+  uploadFile(input: FileUploadInput!): File
+
+  "Create a folder"
+  createFolder(input: CreateFolderInput!): Folder
+
+  "Move a file or folder"
+  moveEntry(input: MoveCopyInput!): OperationResult
+
+  "Copy a file or folder"
+  copyEntry(input: MoveCopyInput!): OperationResult
+
+  "Delete a file or folder"
+  deleteEntry(path: String!): OperationResult
+
+  "Restore a deleted file or folder"
+  restoreEntry(path: String!, trashId: String!): OperationResult
+
+  "Lock a file"
+  lockFile(path: String!): File
+
+  "Unlock a file"
+  unlockFile(path: String!): File
+
+  "Set permissions on a path"
+  setPermissions(input: SetPermissionInput!): FilePermission
+
+  "Remove permissions from a path"
+  removePermissions(path: String!, subjects: [String!]!): OperationResult
+
+  "Create a public or private link"
+  createLink(input: CreateLinkInput!): Link
+
+  "Update a link's settings"
+  updateLink(linkId: String!, input: UpdateLinkInput!): Link
+
+  "Delete a link"
+  deleteLink(linkId: String!): OperationResult
+
+  "Create a new user"
+  createUser(input: CreateUserInput!): User
+
+  "Update a user"
+  updateUser(userId: ID!, input: UpdateUserInput!): User
+
+  "Delete a user"
+  deleteUser(userId: ID!): OperationResult
+
+  "Lock a user account"
+  lockUser(userId: ID!): User
+
+  "Unlock a user account"
+  unlockUser(userId: ID!): User
+
+  "Create a group"
+  createGroup(input: CreateGroupInput!): Group
+
+  "Update a group"
+  updateGroup(groupId: ID!, input: UpdateGroupInput!): Group
+
+  "Delete a group"
+  deleteGroup(groupId: ID!): OperationResult
+
+  "Add users to a group"
+  addGroupMembers(groupId: ID!, userIds: [ID!]!): Group
+
+  "Remove users from a group"
+  removeGroupMembers(groupId: ID!, userIds: [ID!]!): Group
+
+  "Mark notifications as read"
+  markNotificationsRead(notificationIds: [ID!]!): OperationResult
+
+  "Configure notification settings for a path"
+  setNotificationSettings(settings: NotificationSettingInput!): NotificationSetting
+
+  "Create a workflow"
+  createWorkflow(input: CreateWorkflowInput!): Workflow
+
+  "Update a workflow's status"
+  updateWorkflowStatus(workflowId: ID!, status: WorkflowStatus!): Workflow
+
+  "Complete a workflow task"
+  completeWorkflowTask(taskId: ID!, comment: String): WorkflowTask
+
+  "Create a retention policy"
+  createRetentionPolicy(name: String!, description: String, retentionPeriodDays: Int!, paths: [String!]!): RetentionPolicy
+
+  "Delete a retention policy"
+  deleteRetentionPolicy(policyId: ID!): OperationResult
+
+  "Create a webhook"
+  createWebhook(input: CreateWebhookInput!): Webhook
+
+  "Update a webhook"
+  updateWebhook(webhookId: ID!, active: Boolean, events: [AuditEventType!]): Webhook
+
+  "Delete a webhook"
+  deleteWebhook(webhookId: ID!): OperationResult
+
+  "Create an API key"
+  createApiKey(name: String!, scopes: [String!]): ApiKey
+
+  "Revoke an API key"
+  revokeApiKey(keyId: ID!): OperationResult
+
+  "Restore a previous file version"
+  restoreFileVersion(path: String!, versionId: String!): File
+
+  "Delete a specific file version"
+  deleteFileVersion(path: String!, versionId: String!): OperationResult
+
+  "Update file or folder tags"
+  updateTags(path: String!, tags: [String!]!): OperationResult
+
+  "Update custom metadata on a file or folder"
+  updateCustomMetadata(path: String!, metadata: JSON!): OperationResult
+}
+
+# ─── Additional Input Types (referenced in Mutation) ──────────────────────────
+
+input NotificationSettingInput {
+  path: String!
+  notifyOnUpload: Boolean!
+  notifyOnDownload: Boolean!
+  notifyOnDelete: Boolean!
+  notifyOnMove: Boolean!
+  email: String
+}
