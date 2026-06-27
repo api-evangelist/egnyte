@@ -55,7 +55,7 @@ common:
   url: https://www.egnyte.com
 - type: Documentation
   url: https://developers.egnyte.com/docs
-- type: Developer Portal
+- type: DeveloperPortal
   url: https://developers.egnyte.com/
 - type: Authentication
   url: https://developers.egnyte.com/docs/read/Public_API_Authentication
@@ -65,7 +65,7 @@ common:
   url: https://developers.egnyte.com/io-docs
 - type: Pricing
   url: https://www.egnyte.com/pricing
-- type: SignUp
+- type: Signup
   url: https://developers.egnyte.com/member/register
 - type: Login
   url: https://developers.egnyte.com/member/login
@@ -90,7 +90,7 @@ common:
 - name: MCP Server
   url: https://github.com/egnyte/egnyte-mcp-server
   type: MCPServer
-- type: LLMsTxt
+- type: LlmsText
   url: https://developers.egnyte.com/llms.txt
 maintainers:
 - FN: Kin Lane
