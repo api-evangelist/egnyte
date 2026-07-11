@@ -1,0 +1,47 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/egnyte-openapi.yml
+schemes:
+- name: oauth2
+  source: openapi/egnyte-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://{domain}.egnyte.com/puboauth/token
+    tokenUrl: https://{domain}.egnyte.com/puboauth/token
+scopes:
+- scope: Egnyte.audit
+  description: Audit report access
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/egnyte-openapi.yml
+- scope: Egnyte.filesystem
+  description: File system access
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/egnyte-openapi.yml
+- scope: Egnyte.group
+  description: Group management
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/egnyte-openapi.yml
+- scope: Egnyte.link
+  description: Shared link management
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/egnyte-openapi.yml
+- scope: Egnyte.permission
+  description: Permission management
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/egnyte-openapi.yml
+- scope: Egnyte.user
+  description: User management
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/egnyte-openapi.yml

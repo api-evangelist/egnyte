@@ -51,6 +51,8 @@ apis:
   - url: graphql/egnyte-graphql.md
     type: GraphQL
 common:
+- type: OAuthScopes
+  url: scopes/egnyte-scopes.yml
 - type: Website
   url: https://www.egnyte.com
 - type: Documentation
