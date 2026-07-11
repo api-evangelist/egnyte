@@ -51,6 +51,10 @@ apis:
   - url: graphql/egnyte-graphql.md
     type: GraphQL
 common:
+- type: DomainSecurity
+  url: security/egnyte-domain-security.yml
+- type: Authentication
+  url: authentication/egnyte-authentication.yml
 - type: OAuthScopes
   url: scopes/egnyte-scopes.yml
 - type: Website
