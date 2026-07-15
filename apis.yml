@@ -51,6 +51,8 @@ apis:
   - url: graphql/egnyte-graphql.md
     type: GraphQL
 common:
+- type: AgenticAccess
+  url: agentic-access/egnyte-agentic-access.yml
 - type: DomainSecurity
   url: security/egnyte-domain-security.yml
 - type: Authentication
