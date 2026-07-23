@@ -1,0 +1,65 @@
+openapi: 3.1.0
+info:
+  title: Egnyte Public File System Links API
+  version: '1.0'
+  description: Egnyte Public API provides programmatic access to files, folders, users, groups, permissions, links, and audit reports in an Egnyte tenant. Authentication is via OAuth 2.0 scoped access tokens. All endpoints live under the customer tenant domain.
+  contact:
+    name: Egnyte Developers
+    url: https://developers.egnyte.com/docs
+servers:
+- url: https://{domain}.egnyte.com/pubapi
+  description: Customer tenant
+  variables:
+    domain:
+      default: acme
+      description: Egnyte tenant subdomain
+security:
+- oauth2: []
+tags:
+- name: Links
+paths:
+  /v1/links:
+    post:
+      summary: Create a shared link
+      operationId: createLink
+      tags:
+      - Links
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                path:
+                  type: string
+                type:
+                  type: string
+                  enum:
+                  - file
+                  - folder
+                accessibility:
+                  type: string
+                  enum:
+                  - anyone
+                  - password
+                  - domain
+                  - recipients
+      responses:
+        '200':
+          description: Link created
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{domain}.egnyte.com/puboauth/token
+          tokenUrl: https://{domain}.egnyte.com/puboauth/token
+          scopes:
+            Egnyte.filesystem: File system access
+            Egnyte.user: User management
+            Egnyte.group: Group management
+            Egnyte.permission: Permission management
+            Egnyte.link: Shared link management
+            Egnyte.audit: Audit report access

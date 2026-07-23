@@ -1,0 +1,124 @@
+openapi: 3.1.0
+info:
+  title: Egnyte Public File System Users API
+  version: '1.0'
+  description: Egnyte Public API provides programmatic access to files, folders, users, groups, permissions, links, and audit reports in an Egnyte tenant. Authentication is via OAuth 2.0 scoped access tokens. All endpoints live under the customer tenant domain.
+  contact:
+    name: Egnyte Developers
+    url: https://developers.egnyte.com/docs
+servers:
+- url: https://{domain}.egnyte.com/pubapi
+  description: Customer tenant
+  variables:
+    domain:
+      default: acme
+      description: Egnyte tenant subdomain
+security:
+- oauth2: []
+tags:
+- name: Users
+paths:
+  /v2/users:
+    get:
+      summary: List users
+      operationId: listUsers
+      tags:
+      - Users
+      parameters:
+      - in: query
+        name: startIndex
+        schema:
+          type: integer
+      - in: query
+        name: count
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: User list
+          content:
+            application/json:
+              schema:
+                type: object
+    post:
+      summary: Create user
+      operationId: createUser
+      tags:
+      - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Created
+  /v2/users/{userId}:
+    get:
+      summary: Get user
+      operationId: getUser
+      tags:
+      - Users
+      parameters:
+      - in: path
+        name: userId
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: User
+          content:
+            application/json:
+              schema:
+                type: object
+    put:
+      summary: Update user
+      operationId: updateUser
+      tags:
+      - Users
+      parameters:
+      - in: path
+        name: userId
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Updated
+    delete:
+      summary: Delete user
+      operationId: deleteUser
+      tags:
+      - Users
+      parameters:
+      - in: path
+        name: userId
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Deleted
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{domain}.egnyte.com/puboauth/token
+          tokenUrl: https://{domain}.egnyte.com/puboauth/token
+          scopes:
+            Egnyte.filesystem: File system access
+            Egnyte.user: User management
+            Egnyte.group: Group management
+            Egnyte.permission: Permission management
+            Egnyte.link: Shared link management
+            Egnyte.audit: Audit report access

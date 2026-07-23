@@ -1,0 +1,138 @@
+openapi: 3.1.0
+info:
+  title: Egnyte Public File System API
+  version: '1.0'
+  description: Egnyte Public API provides programmatic access to files, folders, users, groups, permissions, links, and audit reports in an Egnyte tenant. Authentication is via OAuth 2.0 scoped access tokens. All endpoints live under the customer tenant domain.
+  contact:
+    name: Egnyte Developers
+    url: https://developers.egnyte.com/docs
+servers:
+- url: https://{domain}.egnyte.com/pubapi
+  description: Customer tenant
+  variables:
+    domain:
+      default: acme
+      description: Egnyte tenant subdomain
+security:
+- oauth2: []
+tags:
+- name: File System
+paths:
+  /v1/fs/{path}:
+    get:
+      summary: List folder contents or get file metadata
+      operationId: getFolderOrFileMetadata
+      tags:
+      - File System
+      parameters:
+      - in: path
+        name: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Folder or file metadata
+          content:
+            application/json:
+              schema:
+                type: object
+    post:
+      summary: Create folder or copy/move
+      operationId: createFolderOrMove
+      tags:
+      - File System
+      parameters:
+      - in: path
+        name: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                action:
+                  type: string
+                  enum:
+                  - add_folder
+                  - copy
+                  - move
+                destination:
+                  type: string
+      responses:
+        '200':
+          description: Action result
+    delete:
+      summary: Delete file or folder
+      operationId: deleteFileOrFolder
+      tags:
+      - File System
+      parameters:
+      - in: path
+        name: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Deleted
+  /v1/fs-content/{path}:
+    get:
+      summary: Download file content
+      operationId: downloadFile
+      tags:
+      - File System
+      parameters:
+      - in: path
+        name: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: File bytes
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+    post:
+      summary: Upload file content
+      operationId: uploadFile
+      tags:
+      - File System
+      parameters:
+      - in: path
+        name: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: Upload result
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{domain}.egnyte.com/puboauth/token
+          tokenUrl: https://{domain}.egnyte.com/puboauth/token
+          scopes:
+            Egnyte.filesystem: File system access
+            Egnyte.user: User management
+            Egnyte.group: Group management
+            Egnyte.permission: Permission management
+            Egnyte.link: Shared link management
+            Egnyte.audit: Audit report access
