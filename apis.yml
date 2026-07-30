@@ -8,7 +8,19 @@ description: Egnyte is an enterprise content collaboration and file sharing plat
   is handled via OAuth 2.0 (Authorization Code, Implicit, Resource Owner, and Refresh
   Token flows) scoped per API surface.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/egnyte.png
 tags:
 - File Sharing
 - Content Collaboration
@@ -21,23 +33,16 @@ created: '2026-05-11'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-- aid: egnyte:public-api
-  name: Egnyte Public API
-  description: REST API providing programmatic access to files, folders, users, groups,
-    permissions, links, audit reports, and workflows in an Egnyte tenant. All endpoints
-    are hosted under the customer's tenant domain at https://{domain}.egnyte.com/pubapi/
-    and use OAuth 2.0 scoped tokens.
+- aid: egnyte:egnyte-file-system-api
+  name: Egnyte File System API
+  description: The File System API from Egnyte — 2 operation(s) for file system.
   humanURL: https://developers.egnyte.com/docs
   baseURL: https://{domain}.egnyte.com/pubapi
   tags:
   - File System
-  - Users
-  - Groups
-  - Permissions
-  - Links
-  - Audit
-  - Workflows
   properties:
+  - type: OpenAPI
+    url: openapi/egnyte-file-system-api-openapi.yml
   - type: Documentation
     url: https://developers.egnyte.com/docs
   - type: Authentication
@@ -46,10 +51,88 @@ apis:
     url: https://developers.egnyte.com/docs/read/getting_started
   - type: File System API
     url: https://developers.egnyte.com/docs/read/File_System_Management_API_Documentation
+  - type: GraphQL
+    url: graphql/egnyte-graphql.md
+- aid: egnyte:egnyte-groups-api
+  name: Egnyte Groups API
+  description: The Groups API from Egnyte — 1 operation(s) for groups.
+  humanURL: https://developers.egnyte.com/docs
+  baseURL: https://{domain}.egnyte.com/pubapi
+  tags:
+  - Groups
+  properties:
   - type: OpenAPI
-    url: openapi/egnyte-openapi.yml
-  - url: graphql/egnyte-graphql.md
-    type: GraphQL
+    url: openapi/egnyte-groups-api-openapi.yml
+  - type: Documentation
+    url: https://developers.egnyte.com/docs
+  - type: Authentication
+    url: https://developers.egnyte.com/docs/read/Public_API_Authentication
+  - type: GettingStarted
+    url: https://developers.egnyte.com/docs/read/getting_started
+  - type: File System API
+    url: https://developers.egnyte.com/docs/read/File_System_Management_API_Documentation
+  - type: GraphQL
+    url: graphql/egnyte-graphql.md
+- aid: egnyte:egnyte-links-api
+  name: Egnyte Links API
+  description: The Links API from Egnyte — 1 operation(s) for links.
+  humanURL: https://developers.egnyte.com/docs
+  baseURL: https://{domain}.egnyte.com/pubapi
+  tags:
+  - Links
+  properties:
+  - type: OpenAPI
+    url: openapi/egnyte-links-api-openapi.yml
+  - type: Documentation
+    url: https://developers.egnyte.com/docs
+  - type: Authentication
+    url: https://developers.egnyte.com/docs/read/Public_API_Authentication
+  - type: GettingStarted
+    url: https://developers.egnyte.com/docs/read/getting_started
+  - type: File System API
+    url: https://developers.egnyte.com/docs/read/File_System_Management_API_Documentation
+  - type: GraphQL
+    url: graphql/egnyte-graphql.md
+- aid: egnyte:egnyte-permissions-api
+  name: Egnyte Permissions API
+  description: The Permissions API from Egnyte — 1 operation(s) for permissions.
+  humanURL: https://developers.egnyte.com/docs
+  baseURL: https://{domain}.egnyte.com/pubapi
+  tags:
+  - Permissions
+  properties:
+  - type: OpenAPI
+    url: openapi/egnyte-permissions-api-openapi.yml
+  - type: Documentation
+    url: https://developers.egnyte.com/docs
+  - type: Authentication
+    url: https://developers.egnyte.com/docs/read/Public_API_Authentication
+  - type: GettingStarted
+    url: https://developers.egnyte.com/docs/read/getting_started
+  - type: File System API
+    url: https://developers.egnyte.com/docs/read/File_System_Management_API_Documentation
+  - type: GraphQL
+    url: graphql/egnyte-graphql.md
+- aid: egnyte:egnyte-users-api
+  name: Egnyte Users API
+  description: The Users API from Egnyte — 2 operation(s) for users.
+  humanURL: https://developers.egnyte.com/docs
+  baseURL: https://{domain}.egnyte.com/pubapi
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/egnyte-users-api-openapi.yml
+  - type: Documentation
+    url: https://developers.egnyte.com/docs
+  - type: Authentication
+    url: https://developers.egnyte.com/docs/read/Public_API_Authentication
+  - type: GettingStarted
+    url: https://developers.egnyte.com/docs/read/getting_started
+  - type: File System API
+    url: https://developers.egnyte.com/docs/read/File_System_Management_API_Documentation
+  - type: GraphQL
+    url: graphql/egnyte-graphql.md
 common:
 - type: AgenticAccess
   url: agentic-access/egnyte-agentic-access.yml
