@@ -1,0 +1,22 @@
+{
+  "provider": "egnyte",
+  "sources": [
+    "egnyte-file-system-api-openapi.yml",
+    "egnyte-groups-api-openapi.yml",
+    "egnyte-links-api-openapi.yml",
+    "egnyte-permissions-api-openapi.yml",
+    "egnyte-users-api-openapi.yml"
+  ],
+  "outputs": [
+    "egnyte-file-system-api-openapi.yml",
+    "egnyte-groups-api-openapi.yml",
+    "egnyte-links-api-openapi.yml",
+    "egnyte-permissions-api-openapi.yml",
+    "egnyte-users-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
