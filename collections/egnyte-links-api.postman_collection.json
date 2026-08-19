@@ -1,0 +1,166 @@
+{
+  "item": [
+    {
+      "id": "6d0fb51c-8e34-47b6-99ef-645445154139",
+      "name": "Links",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bfbef21e-fd63-4397-9e49-82f55da863a7",
+          "name": "Create a shared link",
+          "request": {
+            "name": "Create a shared link",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "links"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Egnyte tenant subdomain",
+                  "type": "any",
+                  "value": "{{domain}}",
+                  "key": "domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"path\": \"<string>\",\n  \"type\": \"<string>\",\n  \"accessibility\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "adcee17e-4ce1-4b53-ab01-e38407f6131a",
+              "name": "Link created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "links"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Egnyte tenant subdomain",
+                      "type": "any",
+                      "value": "{{domain}}",
+                      "key": "domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"<string>\",\n  \"type\": \"<string>\",\n  \"accessibility\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Egnyte tenant subdomain",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "acme",
+      "key": "domain"
+    },
+    {
+      "type": "string",
+      "value": "https://{{domain}}.egnyte.com/pubapi",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "Egnyte.filesystem Egnyte.user Egnyte.group Egnyte.permission Egnyte.link Egnyte.audit"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://{domain}.egnyte.com/puboauth/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://{domain}.egnyte.com/puboauth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "52ecaf19-ecd1-41c4-a7ea-5bebd48823f5",
+    "name": "Egnyte Public File System Links API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Egnyte Public API provides programmatic access to files, folders, users, groups, permissions, links, and audit reports in an Egnyte tenant. Authentication is via OAuth 2.0 scoped access tokens. All endpoints live under the customer tenant domain.\n\nContact Support:\n Name: Egnyte Developers",
+      "type": "text/plain"
+    }
+  }
+}
