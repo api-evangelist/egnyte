@@ -25,6 +25,13 @@ tags:
 - File Sharing
 - Content Collaboration
 - Enterprise Storage
+- Document-Management
+- Governance
+- Data Security
+tags_raw:
+- File Sharing
+- Content Collaboration
+- Enterprise Storage
 - Document Management
 - Governance
 - Data Security
@@ -39,6 +46,8 @@ apis:
   humanURL: https://developers.egnyte.com/docs
   baseURL: https://{domain}.egnyte.com/pubapi
   tags:
+  - Filesystem
+  tags_raw:
   - File System
   properties:
   - type: OpenAPI
@@ -59,6 +68,8 @@ apis:
   humanURL: https://developers.egnyte.com/docs
   baseURL: https://{domain}.egnyte.com/pubapi
   tags:
+  - Group
+  tags_raw:
   - Groups
   properties:
   - type: OpenAPI
@@ -119,6 +130,8 @@ apis:
   humanURL: https://developers.egnyte.com/docs
   baseURL: https://{domain}.egnyte.com/pubapi
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
