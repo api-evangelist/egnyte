@@ -58,7 +58,7 @@ apis:
   humanURL: https://developers.egnyte.com/docs
   baseURL: https://{domain}.egnyte.com/pubapi
   tags:
-  - File System
+  - Filesystem
   tags_raw:
   - File System
   properties:
