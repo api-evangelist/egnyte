@@ -52,28 +52,6 @@ created: '2026-05-11'
 modified: '2026-05-19'
 specificationVersion: '0.23'
 apis:
-- aid: egnyte:egnyte-file-system-api
-  name: Egnyte File System API
-  description: The File System API from Egnyte — 2 operation(s) for file system.
-  humanURL: https://developers.egnyte.com/docs
-  baseURL: https://{domain}.egnyte.com/pubapi
-  tags:
-  - Filesystem
-  tags_raw:
-  - File System
-  properties:
-  - type: OpenAPI
-    url: openapi/egnyte-file-system-api-openapi.yml
-  - type: Documentation
-    url: https://developers.egnyte.com/docs
-  - type: Authentication
-    url: https://developers.egnyte.com/docs/read/Public_API_Authentication
-  - type: GettingStarted
-    url: https://developers.egnyte.com/docs/read/getting_started
-  - type: File System API
-    url: https://developers.egnyte.com/docs/read/File_System_Management_API_Documentation
-  - type: GraphQL
-    url: graphql/egnyte-graphql.md
 - aid: egnyte:egnyte-groups-api
   name: Egnyte Groups API
   description: The Groups API from Egnyte — 1 operation(s) for groups.
@@ -148,6 +126,26 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/egnyte-users-api-openapi.yml
+  - type: Documentation
+    url: https://developers.egnyte.com/docs
+  - type: Authentication
+    url: https://developers.egnyte.com/docs/read/Public_API_Authentication
+  - type: GettingStarted
+    url: https://developers.egnyte.com/docs/read/getting_started
+  - type: File System API
+    url: https://developers.egnyte.com/docs/read/File_System_Management_API_Documentation
+  - type: GraphQL
+    url: graphql/egnyte-graphql.md
+- aid: egnyte:egnyte-filesystem-api
+  name: Egnyte Filesystem API
+  description: The Filesystem API from Egnyte — 2 operation(s) for filesystem.
+  humanURL: https://developers.egnyte.com/docs
+  baseURL: https://{domain}.egnyte.com/pubapi
+  tags:
+  - Filesystem
+  properties:
+  - type: OpenAPI
+    url: openapi/egnyte-filesystem-api-openapi.yml
   - type: Documentation
     url: https://developers.egnyte.com/docs
   - type: Authentication
