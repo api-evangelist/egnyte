@@ -1,11 +1,7 @@
 {
   "provider": "egnyte",
   "sources": [
-    "egnyte-file-system-api-openapi.yml",
-    "egnyte-groups-api-openapi.yml",
-    "egnyte-links-api-openapi.yml",
-    "egnyte-permissions-api-openapi.yml",
-    "egnyte-users-api-openapi.yml"
+    "_original/egnyte-openapi.yml"
   ],
   "outputs": [
     "egnyte-file-system-api-openapi.yml",
@@ -14,9 +10,27 @@
     "egnyte-permissions-api-openapi.yml",
     "egnyte-users-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "egnyte-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "egnyte-openapi.yml: declared missing tag: File System",
+    "egnyte-openapi.yml: declared missing tag: Groups",
+    "egnyte-openapi.yml: declared missing tag: Links",
+    "egnyte-openapi.yml: declared missing tag: Permissions",
+    "egnyte-openapi.yml: declared missing tag: Users",
+    "superseded outputs removed: egnyte-filesystem-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 5 total)"
+  ],
+  "skipped": [
+    "egnyte-filesystem-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "egnyte-groups-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "egnyte-links-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "egnyte-permissions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "egnyte-users-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
