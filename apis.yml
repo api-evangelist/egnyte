@@ -37,7 +37,7 @@ tags:
 - File Sharing
 - Content Collaboration
 - Enterprise Storage
-- Document-Management
+- Document Management
 - Governance
 - Data Security
 tags_raw:
@@ -47,6 +47,7 @@ tags_raw:
 - Document Management
 - Governance
 - Data Security
+- Document-Management
 url: https://raw.githubusercontent.com/api-evangelist/egnyte/refs/heads/main/apis.yml
 created: '2026-05-11'
 modified: '2026-05-19'
@@ -72,8 +73,6 @@ apis:
     url: https://developers.egnyte.com/docs/read/getting_started
   - type: File System API
     url: https://developers.egnyte.com/docs/read/File_System_Management_API_Documentation
-  - type: GraphQL
-    url: graphql/egnyte-graphql.md
 - aid: egnyte:egnyte-links-api
   name: Egnyte Links API
   description: The Links API from Egnyte — 1 operation(s) for links.
@@ -92,8 +91,6 @@ apis:
     url: https://developers.egnyte.com/docs/read/getting_started
   - type: File System API
     url: https://developers.egnyte.com/docs/read/File_System_Management_API_Documentation
-  - type: GraphQL
-    url: graphql/egnyte-graphql.md
 - aid: egnyte:egnyte-permissions-api
   name: Egnyte Permissions API
   description: The Permissions API from Egnyte — 1 operation(s) for permissions.
@@ -112,8 +109,6 @@ apis:
     url: https://developers.egnyte.com/docs/read/getting_started
   - type: File System API
     url: https://developers.egnyte.com/docs/read/File_System_Management_API_Documentation
-  - type: GraphQL
-    url: graphql/egnyte-graphql.md
 - aid: egnyte:egnyte-users-api
   name: Egnyte Users API
   description: The Users API from Egnyte — 2 operation(s) for users.
@@ -134,8 +129,6 @@ apis:
     url: https://developers.egnyte.com/docs/read/getting_started
   - type: File System API
     url: https://developers.egnyte.com/docs/read/File_System_Management_API_Documentation
-  - type: GraphQL
-    url: graphql/egnyte-graphql.md
 - aid: egnyte:egnyte-filesystem-api
   name: Egnyte Filesystem API
   description: The Filesystem API from Egnyte — 2 operation(s) for filesystem.
@@ -154,8 +147,6 @@ apis:
     url: https://developers.egnyte.com/docs/read/getting_started
   - type: File System API
     url: https://developers.egnyte.com/docs/read/File_System_Management_API_Documentation
-  - type: GraphQL
-    url: graphql/egnyte-graphql.md
 common:
 - type: AgenticAccess
   url: agentic-access/egnyte-agentic-access.yml
