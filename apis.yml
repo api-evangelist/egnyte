@@ -148,6 +148,9 @@ apis:
   - type: File System API
     url: https://developers.egnyte.com/docs/read/File_System_Management_API_Documentation
 common:
+- type: CapabilityMap
+  url: capabilities/egnyte-capability-edges.yml
+  name: Egnyte Business Capability Map
 - type: AgenticAccess
   url: agentic-access/egnyte-agentic-access.yml
 - type: DomainSecurity
