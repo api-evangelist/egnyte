@@ -15,6 +15,25 @@
   relationship: distribution-channel
   status: not-a-workflow
   arazzo: null
+- slug: egnyte-mcp-registry
+  label: MCP Registry
+  partner: mcp
+  partner_name: MCP Registry
+  type: register
+  channel: standard-directory
+  evidence: https://registry.modelcontextprotocol.io/v0/servers?search=com.egnyte
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: registry.modelcontextprotocol.io
+    spec_file: null
+    role: mcp-server-listing
+    registered_name: com.egnyte/mcp-server
+    register_id: com.egnyte/mcp-server
+    detected_by: sweep-agent-tools.py
+    detected: '2026-10-14'
+  status: not-a-workflow
+  arazzo: null
 - slug: egnyte-okta-own
   label: Okta (own)
   partner: okta
@@ -24,6 +43,19 @@
   marketplace: own
   channel: partner-built
   evidence: https://www.okta.com/integrations/egnytecom/
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: egnyte-procore-own
+  label: Procore (own)
+  partner: procore
+  partner_name: Procore (own)
+  category: Document Management
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.procore.com/apps/egnyte
   source: edge
   relationship: platform-app
   status: not-a-workflow

@@ -2,7 +2,9 @@ generated: '2026-10-13'
 method: searched
 checked:
 - https://azuremarketplace.microsoft.com/
+- https://registry.modelcontextprotocol.io/v0/servers
 - okta/integrations/okta-integration-edges.yml
+- procore/integrations/procore-integration-edges.yml
 marketplace_apps: []
 edges:
 - partner_name: Microsoft Azure Marketplace
@@ -37,6 +39,37 @@ edges:
   seller_name: Egnyte, Inc.
   detected_by: sweep-cloud-marketplaces.py
   detected: '2026-10-13'
+- partner_name: MCP Registry
+  partner: mcp
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://registry.modelcontextprotocol.io/v0/servers?search=com.egnyte
+  contract_reference:
+    register: registry.modelcontextprotocol.io
+    spec_file: null
+    role: mcp-server-listing
+    registered_name: com.egnyte/mcp-server
+    register_id: com.egnyte/mcp-server
+    detected_by: sweep-agent-tools.py
+    detected: '2026-10-14'
+  mcp_registry:
+    servers:
+    - com.egnyte/mcp-server
+    hosted_remote: 1
+    local_package: 0
+    transports:
+      streamable-http: 1
+    auth_declared: 1
+    catalog_declared: false
+    namespace_domains:
+    - egnyte.com
+  matched_by:
+  - namespace-domain
+  detected_by: sweep-agent-tools.py
+  first_seen: '2026-10-14'
 - partner_name: Okta (own)
   partner: okta
   partner_match: mirror
@@ -65,5 +98,23 @@ edges:
   - SAML
   - SWA
   - UPDATE
+- partner_name: Procore (own)
+  partner: procore
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://marketplace.procore.com/apps/egnyte
+  mirror_of: procore/integrations/procore-integration-edges.yml
+  apps:
+  - Egnyte
+  - Egnyte for Gov
+  listing_count: 2
+  detected: '2026-10-14'
+  detected_by: mirror-platform-listings.py
+  category: Document Management
 source:
 - okta/integrations/okta-integration-edges.yml
