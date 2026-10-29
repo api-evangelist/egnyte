@@ -1,4 +1,4 @@
-# Egnyte (egnyte)
+# Egnyte
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,79 +66,130 @@
 
 Egnyte is an enterprise content collaboration and file sharing platform that provides secure cloud and hybrid file storage, document collaboration, governance, and data security controls for regulated industries. Egnyte's Public API exposes the file system, users, groups, permissions, audit reporting, links, and workflow capabilities so partners and customers can build custom integrations. Authentication is handled via OAuth 2.0 (Authorization Code, Implicit, Resource Owner, and Refresh Token flows) scoped per API surface.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/egnyte/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/egnyte/refs/heads/main/apis.yml)
+**Areas:** File Sharing · Content Collaboration · Enterprise Storage · Document Management · Governance · Data Security
 
-## Scope
+## Egnyte on APIs.io
 
-- **Type:** Index
+Everything profiled for Egnyte is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/egnyte/](https://apis.io/providers/egnyte/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (5)
 
-- File Sharing
-- Content Collaboration
-- Enterprise Storage
-- Document Management
-- Governance
-- Data Security
+- [Egnyte Groups API](https://apis.io/apis/egnyte/egnyte-groups-api/) — The Groups API from Egnyte — 1 operation(s) for groups.
+- [Egnyte Links API](https://apis.io/apis/egnyte/egnyte-links-api/) — The Links API from Egnyte — 1 operation(s) for links.
+- [Egnyte Permissions API](https://apis.io/apis/egnyte/egnyte-permissions-api/) — The Permissions API from Egnyte — 1 operation(s) for permissions.
+- [Egnyte Users API](https://apis.io/apis/egnyte/egnyte-users-api/) — The Users API from Egnyte — 2 operation(s) for users.
+- [Egnyte Filesystem API](https://apis.io/apis/egnyte/egnyte-filesystem-api/) — The Filesystem API from Egnyte — 2 operation(s) for filesystem.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-05-11
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### GraphQL (1)
 
-### Egnyte Public API
+GraphQL schemas.
 
-REST API providing programmatic access to files, folders, users, groups, permissions, links, audit reports, and workflows in an Egnyte tenant. All endpoints are hosted under the customer's tenant domain at https://{domain}.egnyte.com/pubapi/ and use OAuth 2.0 scoped tokens.
+- [Moved to /providers/egnyte/](https://apis.io/graphqls/egnyte/egnyte-graphql/)
 
-- **Human URL:** [https://developers.egnyte.com/docs](https://developers.egnyte.com/docs)
-- **Base URL:** `https://{domain}.egnyte.com/pubapi`
+#### MCP servers (1)
 
-#### Tags
+Model Context Protocol servers that expose the API to agents.
 
-- File System
-- Users
-- Groups
-- Permissions
-- Links
-- Audit
-- Workflows
+- [MCP Server](https://apis.io/servers/egnyte/mcp-server/)
 
-#### Properties
+#### Agentic access (1)
 
-- [Documentation](https://developers.egnyte.com/docs)
-- [Authentication](https://developers.egnyte.com/docs/read/Public_API_Authentication)
-- [Getting Started](https://developers.egnyte.com/docs/read/getting_started)
-- [File  System  A P I](https://developers.egnyte.com/docs/read/File_System_Management_API_Documentation)
-- [OpenAPI](openapi/egnyte-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/egnyte.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/egnyte.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Which operations an agent can call, which act, and which need a human in the loop.
 
-## Common Properties
+- [Egnyte Agentic Access](https://apis.io/agentic-access/egnyte/egnyte-agentic-access/)
+
+#### Collections (6)
+
+Postman and Open Collection request collections.
+
+- [Egnyte Public API](https://apis.io/collections/egnyte/open-egnyte/)
+- [Egnyte Public File System API](https://apis.io/collections/egnyte/open-egnyte-file-system-api/)
+- [Egnyte Public File System Groups API](https://apis.io/collections/egnyte/open-egnyte-groups-api/)
+- [Egnyte Public File System Links API](https://apis.io/collections/egnyte/open-egnyte-links-api/)
+- [Egnyte Public File System Permissions API](https://apis.io/collections/egnyte/open-egnyte-permissions-api/)
+- [Egnyte Public File System Users API](https://apis.io/collections/egnyte/open-egnyte-users-api/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Egnyte Authentication](https://apis.io/security/egnyte/egnyte-authentication/)
+- [Egnyte Domain Security](https://apis.io/security/egnyte/egnyte-domain-security/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Egnyte Scopes](https://apis.io/scopes/egnyte/egnyte-scopes/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.egnyte.com)
 - [Documentation](https://developers.egnyte.com/docs)
-- [Developer  Portal](https://developers.egnyte.com/)
-- [Authentication](https://developers.egnyte.com/docs/read/Public_API_Authentication)
-- [Getting Started](https://developers.egnyte.com/docs/read/getting_started)
-- [A P I  Explorer](https://developers.egnyte.com/io-docs)
+- [Getting started](https://developers.egnyte.com/docs/read/getting_started)
 - [Pricing](https://www.egnyte.com/pricing)
-- [Sign Up](https://developers.egnyte.com/member/register)
-- [Login](https://developers.egnyte.com/member/login)
 - [Support](https://helpdesk.egnyte.com/)
-- [Status Page](https://status.egnyte.com/)
 - [Blog](https://www.egnyte.com/blog)
-- [Privacy Policy](https://www.egnyte.com/corp/privacy-policy)
-- [Terms of Service](https://www.egnyte.com/corp/legal/end-user-license-agreement)
-- [GitHub Organization](https://github.com/egnyte)
-- [Python  S D K](https://github.com/egnyte/python-egnyte)
-- [LinkedIn](https://www.linkedin.com/company/egnyte)
-- [X ( Twitter)](https://x.com/egnyte)
-- [M C P Server](https://github.com/egnyte/egnyte-mcp-server)
-- [L L Ms Txt](https://developers.egnyte.com/llms.txt)
+- [Terms of service](https://www.egnyte.com/corp/legal/end-user-license-agreement)
+- [Privacy policy](https://www.egnyte.com/corp/privacy-policy)
+- [GitHub](https://github.com/egnyte)
+- [Status](https://status.egnyte.com/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 28.3** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 71.7 |
+| Contract quality | 48.7 |
+| Contract governance | 0.0 |
+| Operational transparency | 18.4 |
+| Developer ergonomics | 14.3 |
+| Access clarity | 17.1 |
+
+**Agent readiness 25.4** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | documented (partial credit) |
+| Auth Clarity | negotiable (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | documented (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 21.6** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/egnyte/](https://apis.io/providers/egnyte/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Egnyte: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/egnyte/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
